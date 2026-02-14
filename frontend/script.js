@@ -1,6 +1,6 @@
 // script.js - Frontend do Sistema de Esteganografia LSB Avançada
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://sistema-de-oculta-o-de-arquivos-em.onrender.com';
 let currentToken = null;
 let currentUser = null;
 let lastResultImage = null;
