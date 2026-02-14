@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Esteganografia LSB Avançada - Sistema Completo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><i class="fas fa-user-secret"></i> Sistema de Esteganografia LSB Avançada</h1>
+        <p class="subtitle">Projeto de Exame - Com Backend API & Autenticação</p>
+
+        <div class="auth-section" id="authSection">
+            <div class="auth-form" id="loginForm">
+                <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
+                <input type="text" id="username" placeholder="Usuário" value="admin">
+                <input type="password" id="password" placeholder="Senha" value="admin123">
+                <button onclick="login()">Entrar</button>
+                <button onclick="showRegister()">Registrar</button>
+            </div>
+
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <h3><i class="fas fa-user-plus"></i> Registrar</h3>
+                <input type="text" id="regUsername" placeholder="Usuário">
+                <input type="password" id="regPassword" placeholder="Senha">
+                <input type="email" id="regEmail" placeholder="Email (opcional)">
+                <button onclick="register()">Registrar</button>
+                <button onclick="showLogin()">Voltar ao Login</button>
+            </div>
+        </div>
+
+        <div id="userSection" style="display: none; padding: 20px; background: #f0f0f0; text-align: center;">
+            <h3>Bem-vindo, <span id="currentUser" style="color: #1a237e; font-weight: bold;"></span></h3>
+            <button class="btn-logout" onclick="logout()">Sair</button>
+            <button class="btn-delete-account" onclick="deleteAccount()">Eliminar Conta</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('encode')">Ocultar</button>
+            <button class="tab-btn" onclick="showTab('decode')">Extrair</button>
+            <button class="tab-btn" onclick="showTab('history')">Histórico</button>
+            <button class="tab-btn" onclick="showTab('logs')">Logs</button>
+        </div>
+
+        <div id="encode" class="tab-content active">
+            <div class="card">
+                <h3><i class="fas fa-lock"></i> Ocultar Arquivo em Imagem</h3>
+                <label><i class="fas fa-image"></i> Imagem de cobertura (PNG):</label>
+                <input type="file" id="coverImage" accept="image/png">
+                <div id="coverInfo" class="file-info"></div>
+
+                <label><i class="fas fa-file"></i> Ficheiro a ocultar:</label>
+                <input type="file" id="secretFile">
+                <div id="secretInfo" class="file-info"></div>
+
+                <label><i class="fas fa-key"></i> Chave secreta:</label>
+                <input type="password" id="encodeKey" placeholder="A mesma chave será necessária para extrair">
+
+                <label><i class="fas fa-cogs"></i> Opções avançadas:</label>
+                <label><input type="checkbox" id="compressOption" checked> Comprimir dados antes de ocultar (aumenta capacidade)</label>
+
+                <button class="btn-process" onclick="processEncode()">Gerar Imagem com Dados Ocultos</button>
+            </div>
+        </div>
+
+        <div id="decode" class="tab-content">
+            <div class="card">
+                <h3><i class="fas fa-unlock"></i> Extrair Arquivo de Imagem</h3>
+                <label><i class="fas fa-image"></i> Imagem esteganografada:</label>
+                <input type="file" id="stegoImage" accept="image/png">
+                <div id="stegoInfo" class="file-info"></div>
+
+                <label><i class="fas fa-key"></i> Chave secreta:</label>
+                <input type="password" id="decodeKey" placeholder="Insira a mesma chave usada na ocultação">
+
+                <button class="btn-process" onclick="processDecode()">Extrair Ficheiro Oculto</button>
+            </div>
+        </div>
+
+        <div id="history" class="tab-content">
+            <div class="card">
+                <h3><i class="fas fa-history"></i> Histórico de Atividades</h3>
+                <button onclick="loadHistory()" class="btn-refresh">
+                    <i class="fas fa-sync-alt"></i> Atualizar Histórico
+                </button>
+                <div id="historyList" class="history-list">
+                </div>
+            </div>
+        </div>
+
+        <div id="logs" class="tab-content">
+            <div class="card">
+                <h3><i class="fas fa-clipboard-list"></i> Logs de Atividade (Admin)</h3>
+                <button onclick="loadLogs()" class="btn-refresh">
+                    <i class="fas fa-sync-alt"></i> Atualizar Logs
+                </button>
+                <div id="logsList" class="logs-list">
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <p><i class="fas fa-info-circle"></i> Sistema de Esteganografia LSB Avançada - Projeto de Exame</p>
+            <p><i class="fas fa-server"></i> API Backend: <span id="apiStatus">Desconectado</span></p>
+            <p><i class="fas fa-lightbulb"></i> <strong>Inovação:</strong> Compressão de dados antes da ocultação</p>
+        </div>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
